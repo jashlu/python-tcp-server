@@ -35,7 +35,7 @@ while(True):
         print(f"Client {a} says: {data}")
 
         # Send a response to the client
-        message = f"Server received: {data}"
+        message = f"Received your message"
         c.send(message.encode())
 
     # Close client connection
