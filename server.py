@@ -10,6 +10,7 @@ def handle_client(client_socket, client_address):
 
     while True:
         # receive data from the client
+        # 1024 represents max bytes (1kb) that can be read from the socket at once
         data = client_socket.recv(1024).decode()
         # if no data, close.
         if not data:
