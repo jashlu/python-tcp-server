@@ -18,6 +18,7 @@ func NewServer(listenAddr string) *Server {
 	return &Server{
 		listenAddr: listenAddr,
 		quitch: make(chan struct{}),
+		msgch: make(chan []byte),
 	}
 }
 
@@ -31,8 +32,7 @@ func (s *Server) Start() error {
 
 	go s.acceptLoop()
 
-	<-s.quitch
-
+	<-s.quitch				//wait until quitch returns stopped signal
 	close(s.msgch)
 
 	return nil
@@ -63,14 +63,15 @@ func (s *Server) readLoop(conn net.Conn){
 		}
 
 		msg := buf[:n]
-		
-	}
+		s.msgch <- msg		//send msg to the main channel
+	}	
 }
 
 
 func main() {
 	server := NewServer(":3001")
 	
+	//Go routine to process messages recevied by the server.
 	go func() {
 		for msg := range server.msgch {
 			fmt.Println("Received message from connection:", string(msg))
