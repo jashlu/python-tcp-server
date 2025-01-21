@@ -1,2 +1,4 @@
-# TCP Server, set up in Python
-Creating a TCP server in Python for fun, to learn the ins and outs of networking 
+# TCP Server, learning TCP server/client communication in different Languages. 
+Originally set up in Python, simple TCP server to understand how TCP server/client communication works. 
+
+Additional Golang implementation as exercise to learn GoLang
